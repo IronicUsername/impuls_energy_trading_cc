@@ -114,3 +114,4 @@ helm/*.tgz
 *secrets.yml
 
 # our caches
+# .weather_prog
