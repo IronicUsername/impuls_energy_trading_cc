@@ -27,7 +27,8 @@ Basically you create the settings name as the file name and have the value as th
 
 ## Development
 
-Install [`poetry`](https://python-poetry.org/) to work with this project.
+It is recommended to install [`poetry`](https://python-poetry.org/) to work with this project.
+If you are **NOT** using `poetry`, in the app root, you can find the [`requirements.txt`](./requirements.txt) and [`requirements.dev.txt`](./requirements.dev.txt) files to install the projects dependencies.
 
 After that you:
 
