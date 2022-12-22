@@ -1,0 +1,68 @@
+{
+    "folders": [{
+            "path": "app"
+        },
+        {
+            "name": "root",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true,
+            "app": true,
+        },
+
+        "python.defaultInterpreterPath": ".venv/bin/python",
+
+        "python.linting.flake8Enabled": true,
+        "python.linting.mypyEnabled": true,
+        "python.linting.pydocstyleEnabled": true,
+        "python.linting.enabled": true,
+
+        // also could be necessary for the above to work correctly:
+        "python.linting.flake8Args": ["--config=./pyproject.toml"],
+        "python.linting.mypyArgs": ["--config-file=./pyproject.toml"],
+        // default behaviour
+        "python.linting.pydocstyleArgs": ["--config=./pyproject.toml", "--match='(?!test_).*\\.py'"],
+
+        "python.formatting.provider": "black",
+
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestArgs": [
+            "tests",
+            "-p",
+            "no:sugar",
+            "--no-cov",
+            "-vvv",
+            "-s",
+            "-n 0"
+        ],
+        "[json]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[markdown]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+    },
+    "extensions": {
+        "recommendations": ["esbenp.prettier-vscode"]
+    },
+    "launch": {
+        "configurations": [{
+            "name": "Python: Debug Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "purpose": ["debug-test"],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }]
+    }
+}

@@ -1,0 +1,127 @@
+[tool.poetry]
+name = "weather_prog"
+version = "0.1.0"
+description = ""
+authors = ["IronicUsername <github@trash-economy.io>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+typer = {extras = ["all"], version = "^0.7.0"}
+httpx = "^0.23.0"
+pydantic = {extras = ["email", "dotenv"], version = "^1.9.0"}
+python-json-logger = "^2.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7"
+flake8 = "^5"
+flake8-bugbear = "^22.9.23"
+flake8-print = "^5.0.0"
+darglint = "^1.5.8"
+pytest-sugar = "^0.9.4"
+pytest-xdist = "^2.1.0"
+pytest-cov = {extras = ["toml"], version = "^4.0.0"}
+pytest-mock = "^3.4.0"
+types-requests = "^2.28.11.2"
+requests = "^2.26.0"
+mypy = "^0.982"
+pre-commit = "^2.15.0"
+poethepoet = "^0.16.4"
+isort = "^5.9.3"
+click = "^7.1.2"
+black = "^21.9b0"
+respx = "^0.20.0"
+autoflake8 = "^0.4.0"
+pytest-datadir = "^1.3.1"
+pydocstyle = "^6.1.1"
+pytest-asyncio = "^0.19.0"
+pytest-freezegun = "^0.4.2"
+types-python-dateutil = "^2.8.19"
+
+[tool.poe.tasks]
+"_black:check" = "poetry run black . --check"
+"_black:fix" = "poetry run black ."
+
+"_isort:check" = "poetry run isort . --check"
+"_isort:fix" = "poetry run isort ."
+
+"_autoflake8:fix" = "poetry run autoflake8 --in-place --expand-star-imports --remove-unused-variables --remove-duplicate-keys --exit-zero-even-if-changed -r src tests"
+"_autoflake8:check" = "poetry run autoflake8 --expand-star-imports --remove-unused-variables --remove-duplicate-keys -r src tests"
+
+"flake8" = "poetry run flake8 src tests"
+"mypy" = "poetry run mypy ."
+"pydocstyle" = "poetry run pydocstyle -e -s src tests"
+
+"style:check" = {sequence = ["_black:check", "_autoflake8:check", "_isort:check", "mypy", "flake8", "pydocstyle"], help = "Check the app code style" }
+"style:fix" = {sequence = ["_black:fix", "_autoflake8:fix", "_isort:fix"], help = "Check and autofix the app code style" }
+
+_install = "poetry install"
+setup-precommit-hook = { cmd = "poetry run pre-commit install", help = "Setup the git pre-commit hock that checks for style errors" }
+
+install = {sequence = ["_install", "setup-precommit-hook"], help = "Install all application dependencies"}
+test = {cmd = "poetry run pytest", help = "Run application tests" }
+
+[tool.pydocstyle]
+convention = "numpy"
+
+[tool.coverage.report]
+fail_under = 70
+show_missing = true
+skip_covered = true
+# TODO: only a debug file. Remove when done.
+omit = [
+    "src/weather_prog/__main__.py",
+    "src/weather_prog/cli/__init__.py",
+    "src/weather_prog/cli/__main__.py",
+]
+
+[tool.mypy]
+python_version = "3.9"
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+show_error_context = true
+show_error_codes = true
+strict = true
+exclude= "tests"
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 119
+
+[tool.black]
+line-length = 119
+
+[tool.coverage.run]
+omit = [
+    "src/weather_prog/__main__.py",
+    "src/weather_prog/cli/__init__.py",
+    "src/weather_prog/cli/__main__.py",
+]
+
+[tool.pytest.ini_options]
+addopts = """\
+    --cov=src \
+    --cov-report term-missing \
+    --cov-branch \
+    -n auto \
+    """
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+weather_prog = "weather_prog.cli:run_app"
