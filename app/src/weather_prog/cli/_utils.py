@@ -54,14 +54,11 @@ def initialize_settings() -> Path:
 
 
 def generate_output(weather_forecast: api_models.WeatherForecast) -> Path:
-    """Generate 3 different output files and return 1 output object as dict/json.
+    """Generate 2 different output files and return the base output path.
 
     Generates:
-    - `.txt` file
+    - `.csv` file
     - `.json` file
-    - `.pdf` file
-
-    TODO: finish function
     """
     encoding, filename = "utf-8", "weather_prog_result"
     output_start_timestamp = int(time.mktime(datetime.now().timetuple()))

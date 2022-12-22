@@ -68,7 +68,6 @@ convention = "numpy"
 fail_under = 70
 show_missing = true
 skip_covered = true
-# TODO: only a debug file. Remove when done.
 omit = [
     "src/weather_prog/__main__.py",
     "src/weather_prog/cli/__init__.py",
