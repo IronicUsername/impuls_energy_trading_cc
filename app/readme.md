@@ -69,10 +69,8 @@ E.g., run `poetry run poe install` to install all dependencies or `poetry run po
 
 ## Run the app
 
-For running the app, one has 3 options:
+For running the app, one has 2 options:
 
-- `poe validate`
-  - For this, you have to be able to call `poe` within the project.
 - `poetry run weather_prog` OR `weather_prog` when installed locally without `poetry`
 - `python -m weather_prog` (`-m` = calls a python module)
   - this works if you install the app to your local machine. You can ofc also call this with `poetry run python -m weather_prog`.
