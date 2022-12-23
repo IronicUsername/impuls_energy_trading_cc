@@ -59,7 +59,7 @@ class Settings(pydantic.BaseSettings):
     api_weather_forecast_base_url: pydantic.HttpUrl = pydantic.parse_obj_as(
         pydantic.HttpUrl, "http://api.weatherapi.com/v1/forecast.json"
     )
-    api_weather_auth_token: str = "bea853d469e0444dbe7152331220507"
+    api_weather_auth_token: str = str(16 * "0")
     cli_out_path: Path = CLI_OUT_PATH_DEFAULT
     cli_log_dir: Path = CLI_LOG_DIR_DEFAULT
 

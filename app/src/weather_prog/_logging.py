@@ -41,7 +41,7 @@ def configure_logging(log_level: str) -> None:
 
     root_logger = logging.getLogger()
     root_logger.handlers.clear()
-    root_logger.setLevel(str(LOG_LEVEL.NOTSET))
+    root_logger.setLevel(str(LOG_LEVEL[log_level]))
 
     # set for every case the log output
     # no log output when these criterions hit
